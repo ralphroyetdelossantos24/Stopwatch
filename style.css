@@ -1,0 +1,352 @@
+:root {
+    --minion-yellow: #F5E050;
+    --minion-blue: #426E9F;
+    --minion-black: #2D2D2D;
+    --minion-goggle: #999;
+    --bg-color: #E0F7FA;
+    --card-bg: #FFFFFF;
+    --text-color: #333;
+    --shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+body[data-theme="dark"] {
+    --bg-color: #181c24;
+    --card-bg: #232733;
+    --text-color: #f3f3f3;
+    --minion-yellow: #b8a900;
+    --minion-blue: #233a5c;
+    --minion-black: #e0e0e0;
+    --minion-goggle: #bbb;
+}
+
+body[data-theme="color"] {
+    --bg-color: var(--custom-bg, #ffe0f7);
+    --card-bg: var(--custom-card, #fff0fa);
+    --text-color: var(--custom-text, #6a006a);
+    --minion-yellow: var(--custom-yellow, #ffb347);
+    --minion-blue: var(--custom-blue, #a259ff);
+    --minion-black: var(--custom-black, #6a006a);
+    --minion-goggle: var(--custom-goggle, #ffb347);
+}
+
+.theme-controls .btn-text {
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    border: 1px solid #bbb;
+    background: var(--card-bg);
+    color: var(--text-color);
+    padding: 6px 18px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+.theme-controls .btn-text:active, .theme-controls .btn-text:focus {
+    outline: 2px solid var(--minion-blue);
+}
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background: var(--bg-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* --- Minions Stage --- */
+.minion-stage {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    height: 80px;
+    align-items: flex-end;
+}
+
+.minion {
+    width: 40px;
+    height: 60px;
+    background: var(--minion-yellow);
+    border-radius: 20px 20px 10px 10px;
+    position: relative;
+    border: 2px solid var(--minion-black);
+    /* Default state is paused */
+    animation: bounce 0.8s infinite alternate;
+    animation-play-state: paused;
+}
+
+/* Overalls */
+.minion::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 25px;
+    background: var(--minion-blue);
+    border-radius: 0 0 8px 8px;
+    border-top: 2px solid var(--minion-black);
+}
+
+/* Goggle Strap */
+.minion::before {
+    content: '';
+    position: absolute;
+    top: 18px;
+    left: -2px;
+    width: calc(100% + 4px);
+    height: 6px;
+    background: var(--minion-black);
+}
+
+/* Eye (Cyclops or Two eyes via child elements) */
+.eye {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 18px;
+    background: white;
+    border-radius: 50%;
+    border: 3px solid var(--minion-goggle);
+    z-index: 2;
+    box-shadow: 0 0 0 1px var(--minion-black);
+}
+
+.pupil {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 6px;
+    background: var(--minion-black);
+    border-radius: 50%;
+}
+
+/* Mouth */
+.mouth {
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 6px;
+    border-bottom: 2px solid var(--minion-black);
+    border-radius: 0 0 10px 10px;
+}
+
+/* Arms */
+.arm-left, .arm-right {
+    position: absolute;
+    top: 35px;
+    width: 8px;
+    height: 20px;
+    background: var(--minion-yellow);
+    border: 2px solid var(--minion-black);
+    border-radius: 4px;
+    z-index: -1;
+}
+.arm-left { left: -6px; transform: rotate(20deg); }
+.arm-right { right: -6px; transform: rotate(-20deg); }
+
+/* Animation Keyframes */
+@keyframes bounce {
+    0% { transform: translateY(0) scale(1); }
+    100% { transform: translateY(-15px) scale(1.05); }
+}
+
+@keyframes wave {
+    0% { transform: rotate(20deg); }
+    100% { transform: rotate(160deg); }
+}
+
+/* Variations for minions */
+.minion:nth-child(2) { animation-delay: 0.1s; height: 55px; }
+.minion:nth-child(3) { animation-delay: 0.2s; height: 65px; }
+.minion:nth-child(4) { animation-delay: 0.15s; height: 58px; }
+.minion:nth-child(5) { animation-delay: 0.05s; height: 62px; }
+
+/* When running, animations play */
+body.running .minion {
+    animation-play-state: running;
+}
+
+/* --- Stopwatch Card --- */
+.stopwatch-card {
+    background: var(--card-bg);
+    width: 400px;
+    border-radius: 10px;
+    padding: 0;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 10;
+    overflow: hidden;
+    color: var(--text-color);
+}
+
+.card-header {
+    padding: 25px 30px;
+}
+
+.header-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.7;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.project-name {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.timer-container {
+    background: white;
+    margin: 0 15px;
+    border-radius: 5px;
+    padding: 30px 20px 50px 20px; /* Extra padding bottom for button */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.time-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+}
+
+.time-value {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: #333;
+    line-height: 1;
+}
+
+.time-label {
+    font-size: 0.6rem;
+    color: #999;
+    margin-top: 8px;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.separator {
+    font-size: 2rem;
+    color: #ddd;
+    margin-top: -25px; /* Align with numbers */
+}
+
+/* Floating Play Button */
+.btn-floating-play {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 50px;
+    background: #0077A3; /* Darker blue for button */
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0, 119, 163, 0.4);
+    transition: transform 0.2s, background 0.2s;
+}
+
+.btn-floating-play:hover {
+    transform: translateX(-50%) scale(1.1);
+    background: #006085;
+}
+
+.play-icon {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 0 8px 14px;
+    border-color: transparent transparent transparent white;
+    margin-left: 4px; /* Optical centering */
+    transition: all 0.2s;
+}
+
+/* Pause Icon State */
+.btn-floating-play.playing .play-icon {
+    width: 12px;
+    height: 14px;
+    border-style: double;
+    border-width: 0 0 0 12px; /* Double bar trick or just use border */
+    border-color: white;
+    margin-left: 0;
+}
+
+/* Footer Actions */
+.card-footer {
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-text {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: color 0.2s;
+    text-transform: uppercase;
+}
+
+body[data-theme=""], body:not([data-theme]), body[data-theme="light"] {
+}
+body[data-theme=""] .btn-text,
+body:not([data-theme]) .btn-text,
+body[data-theme="light"] .btn-text {
+    color: #111;
+}
+body[data-theme=""] .btn-text:hover,
+body:not([data-theme]) .btn-text:hover,
+body[data-theme="light"] .btn-text:hover,
+body[data-theme=""] .btn-text.active,
+body:not([data-theme]) .btn-text.active,
+body[data-theme="light"] .btn-text.active {
+    color: #333;
+}
+
+.btn-text:hover,
+.btn-text.active {
+    color: white;
+}
+    width: 6px;
+}
+.laps-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.laps-container::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+}
