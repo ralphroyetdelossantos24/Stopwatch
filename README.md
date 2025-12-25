@@ -19,7 +19,7 @@ A playful stopwatch web app with animated minions and theme customization.
 
 1. **Clone the repository**
    ```sh
-   git clone <your-repo-url>
+   git clone https://github.com/ralphroyetdelossantos24/Stopwatch.git
    ```
 2. **Navigate to the project folder**
    ```sh
@@ -42,3 +42,4 @@ This project is open source and free to use.
 ## 🙏 Credits
 
 Created by Ralph Royet, December 2025.
+
