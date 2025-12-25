@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minion Stopwatch</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Theme Changer Buttons -->
+    <div class="theme-controls" style="display:flex; gap:12px; justify-content:center; margin-bottom:18px;">
+        <button id="theme-toggle" class="btn-text">Dark</button>
+        <button id="color-theme" class="btn-text">🎨 Color</button>
+        <input type="color" id="color-picker" style="display:none;" aria-label="Pick a color theme" />
+    </div>
+
+    <!-- Minions Stage -->
+    <div class="minion-stage">
+        <!-- Minion 1 -->
+        <div class="minion">
+            <div class="eye"><div class="pupil"></div></div>
+            <div class="mouth"></div>
+            <div class="arm-left"></div>
+            <div class="arm-right"></div>
+        </div>
+        <!-- Minion 2 -->
+        <div class="minion">
+            <div class="eye"><div class="pupil"></div></div>
+            <div class="mouth"></div>
+            <div class="arm-left"></div>
+            <div class="arm-right"></div>
+        </div>
+        <!-- Minion 3 (Two Eyes) -->
+        <div class="minion">
+            <div class="eye" style="left: 35%; width: 14px; height: 14px;"><div class="pupil" style="width: 4px; height: 4px;"></div></div>
+            <div class="eye" style="left: 65%; width: 14px; height: 14px;"><div class="pupil" style="width: 4px; height: 4px;"></div></div>
+            <div class="mouth"></div>
+            <div class="arm-left"></div>
+            <div class="arm-right"></div>
+        </div>
+        <!-- Minion 4 -->
+        <div class="minion">
+            <div class="eye"><div class="pupil"></div></div>
+            <div class="mouth"></div>
+            <div class="arm-left"></div>
+            <div class="arm-right"></div>
+        </div>
+        <!-- Minion 5 -->
+        <div class="minion">
+            <div class="eye"><div class="pupil"></div></div>
+            <div class="mouth"></div>
+            <div class="arm-left"></div>
+            <div class="arm-right"></div>
+        </div>
+    </div>
+
+    <!-- Stopwatch Card -->
+    <div class="stopwatch-card">
+        <div class="card-header">
+            <span class="header-label">TIMER</span>
+            <h2 class="project-name">Calculator Project</h2>
+        </div>
+        
+        <div class="timer-container">
+            <div class="time-unit">
+                <span class="time-value" id="display-min">00</span>
+                <span class="time-label">MINUTES</span>
+            </div>
+            <div class="separator">:</div>
+            <div class="time-unit">
+                <span class="time-value" id="display-sec">00</span>
+                <span class="time-label">SECONDS</span>
+            </div>
+            <div class="separator">:</div>
+            <div class="time-unit">
+                <span class="time-value" id="display-ms">00</span>
+                <span class="time-label">MILLISECONDS</span>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <button class="btn-text" id="btn-start">START</button>
+            <button class="btn-text" id="btn-stop">STOP</button>
+            <button class="btn-text" id="btn-reset">RESET</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
